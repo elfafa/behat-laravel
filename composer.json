@@ -1,0 +1,17 @@
+{
+    "name": "elfafa/behat-library",
+    "description": "Behat useful library for Laravel",
+    "type": "library",
+    "authors": [{
+            "name": "Fabien Somnier",
+            "email": "fabien.somnier@gmail.com"
+    }],
+    "require": {
+        "behat/behat": "~3.0",
+        "behat/mink-extension": "~2.0"
+    },
+    "autoload": {
+        "psr-0": { "Behat": "src/" }
+    },
+    "minimum-stability": "dev"
+}

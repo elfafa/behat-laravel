@@ -1,0 +1,6 @@
+{
+    "cookiesFile"      : "storage/framework/sessions/cookies.txt",
+    "webdriver"        : 8643,
+    "webdriverLogFile" : "storage/logs/phantomjs_error.log",
+    "webdriverLogLevel": "ERROR"
+}

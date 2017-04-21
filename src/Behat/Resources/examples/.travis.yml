@@ -1,0 +1,38 @@
+# take care of @toadapt indications
+language: php
+
+php:
+    - 7.0.14
+
+sudo: true
+
+# to stop all related jobs if one has failed
+matrix:
+    fast_finish: true
+
+services:
+    - mysql
+
+addons:
+    host:
+        - localhost
+
+before_install:
+    - composer self-update
+
+install:
+    # installs
+    - gem install mailcatcher wkhtmltopdf-binary 2>&1 > /dev/null
+    # composer
+    - travis_retry composer install --dev --prefer-dist
+
+before_script:
+    # start mailcatcher / mock servers
+    - mailcatcher --ip localhost 2>&1 > /dev/null
+    # launchs
+    - phantomjs --config=phantomjs.json 2>&1 > /dev/null &
+    - php -S localhost:8000 -t ./web 2>&1 > /dev/null &
+
+script:
+    - behat
+

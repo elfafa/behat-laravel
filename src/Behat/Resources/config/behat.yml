@@ -1,0 +1,53 @@
+default:
+
+    translation:
+        locale: en
+
+    extensions:
+        Laracasts\Behat:
+            # env_path: .env.behat
+        Behat\MinkExtension:
+            base_url          : http://localhost:8000
+            default_session   : selenium2
+            javascript_session: selenium2
+            show_cmd          : echo %s
+            browser_name      : phantomjs
+            laravel           : ~
+            selenium2         :
+                capabilities: { "browser": "phantomjs", "version" : "ANY"}
+                wd_host     : http://localhost:8643/wd/hub
+            sessions:
+                default:
+                    selenium2: ~
+        Sanpi\Behatch\Extension: ~
+        Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
+            url                  : http://localhost:1080
+            purge_before_scenario: true
+        Novaway\CommonContexts\Extension: ~
+
+    suites:
+        default:
+            contexts:
+                - Alex\MailCatcher\Behat\MailCatcherContext
+                - nwcontext:form
+                - nwcontext:formstone
+                - nwcontext:select2
+                - behatch:browser
+                - behatch:debug:
+                    screenshotDir: "app/behat"
+                - behatch:system:
+                    root: "app/behat"
+                - behatch:json
+                - behatch:table
+                - behatch:rest
+            paths:
+                - tests/functional/behat
+
+wip:
+    filters:
+        tags: "@wip&&~@validated"
+
+travis:
+    gherkin:
+        filters:
+            tags: "~@wip,@validated"
